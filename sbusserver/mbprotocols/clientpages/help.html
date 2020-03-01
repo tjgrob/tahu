@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>SBProbe - Help</title>
+
+<link rel="icon" type="image/png" href="systemicon.png">
+<!-- General page layout style sheet. -->
+<link rel="stylesheet" href="systempagelayout.css" type="text/css">
+</head>
+
+<body>
+<div id="filler">
+
+	<div id="header">
+		<p class="headlogo">
+			<img src="/systemlogo.png" width="200" alt="MB Logic Logo"/>
+			<span class="headtitle1">SBProbe </span>
+			<span class="headtitle2"> for an open world in automation</span>
+		</p>
+	</div>
+
+	<!-- This is the standard nav bar. -->
+	<div id="nav">
+		<ul>
+			<li><a href="readdata.html">Read Data</a></li>
+			<li><a href="writedata.html">Write Data</a></li>
+			<li><a href="setparams.html">Set Parameters</a></li>
+			<li><a href="help.html">Help</a></li>
+		</ul>
+	</div>
+
+<div id="datadisplay">
+
+<h1>Help</h1>
+
+<hr>
+
+
+<h2>About:</h2>
+
+<p>SBProbe is an interactive user tool for reading and writing to SAIA Ether
+SBus field devices. It can be used for testing, troubleshooting, and 
+commissioning of field devices such as valves, sensors, PLCs and other 
+equipment. 
+</p>
+
+<p>SBProbe is server based and is accessed via a web browser. The server and
+the web browser do not have to be on the same computer.
+</p>
+
+<hr>
+
+<h2>Help Topics:</h2>
+
+<ul>
+	<li><a href="#Starting SBProbe">Starting SBProbe</a></li>
+	<li><a href="#Start Parameters">Start Parameters</a></li>
+	<li><a href="#Accessing the User Interface">
+		Accessing the User Interface</a></li>
+	<li><a href="#Setting Communications Parameters">
+		Setting Communications Parameters</a></li>
+	<li><a href="#Reading Data">Reading Data</a></li>
+	<li><a href="#Writing Data">Writing Data</a></li>
+	<li><a href="#Errors">Errors</a></li>
+</ul>
+
+<hr>
+
+<h2><a name="Starting SBProbe">Starting SBProbe:</a></h2>
+
+<p>The SBProbe program can be started as follows:
+</p>
+
+
+<h3>For Linux:</h3>
+
+<pre class="examples">
+
+	./sbprobe.py
+
+</pre>
+
+
+<h3>For MS Windows:</h3>
+
+<pre class="examples">
+
+	c:\python25\python sbprobe.py
+
+</pre>
+
+<p>For MS Windows, the first part of the path ("c:\python25\python") will
+depend on where you installed Python, and what version you have installed.
+If you have installed it in a non-standard location you will need to specify
+the path to where you have actually installed it. If you have installed a 
+version other than 2.5, you will need to change the "python25" to match the 
+appropriate version (e.g. for version 2.6, use "python26").
+</p>
+
+<hr>
+
+<h2><a name="Start Parameters">Start Parameters:</a></h2>
+
+<p>When starting the system as shown above, the defaults will be used as the 
+initial parameters, and any others must be changed manually. It is possible
+to specify certain parameters on the command line in order to have the system
+automatically use those parameters on start up. The start parameters are 
+defined as follows:
+</p>
+
+
+<ul>
+	<li>p = The port for the web server used by the user interface. The
+		default is 8680.</li>
+	<li>h = The host name (address) of the remote field device you wish
+		to connect to. The default is 'localhost'.</li>
+	<li>r = The port number for the remote field device. The default is
+		5050.</li>
+	<li>u = The SBus station address for the remote field device. The default 
+		is 1.</li>
+	<li>t = The time-out (in seconds) to use for communications with the
+		remote field device. The default is 5.0</li>
+	<li>c = Connect on start-up. If "-c y", the system will automatically 
+		connect to the field device on start up. For any other value, the
+		connect must be made manually. The default is to connect manually.</li>
+	<li>a = Auto reconnect on disconnect error. If "-a y", the system will 
+		automatically re-connect to the field device if there was a connection
+		error (e.g. the connection was closed from either end).  The default is 
+		to automatically re-connect. If auto-connect was selected and connect 
+		on start up was not selected, the connection will automatically be made
+		using the current parameters when a read or write request is made. </li>
+</ul>
+
+
+<h3>Example for Linux:</h3>
+
+<pre class="examples">
+
+	./sbprobe.py -p 8680 -h localhost -r 5050 -u 1 -t 30.0 -c y -a y
+
+</pre>
+
+
+<h3>Example for MS Windows:</h3>
+
+<pre class="examples">
+
+	c:\python25\python sbprobe.py -p 8680 -h localhost -r 5050 -u 1 -t 30.0 -c y -a y
+
+</pre>
+
+<hr>
+
+<h2><a name="Accessing the User Interface">Accessing the User Interface:</a></h2>
+
+<p>The user interface is accessed via a web browser. The user interface 
+consists of four web pages:
+</p>
+
+<ul>
+	<li>Help (help.html) - The on-line help system.</li>
+	<li>Set Parameters (setparams.html) - Set or change the parameters for 
+		communicating with the field device.</li>
+	<li>Read Data (readdata.html) - Read data from the field device.</li>
+	<li>Write Data (writedata.html) - Write data to the field device.</li>
+</ul>
+
+<p>To access any of the web pages, enter the URL of the web page into your
+web browser, including the page name, the host for the web server (not the one 
+for the field device), and the port number for the web server (not the one 
+for the field device). For example:
+</p>
+
+<pre class="examples">
+
+	http://localhost:8680/help.html
+
+</pre>
+
+<p>The host name ("localhost" in this example) and the port number ("8680" in
+this example) may be different depending upon how and where you have installed
+the system. The example shown above will access the help web page.
+</p>
+
+<p>Once you have accessed on web page, the others are accessible via a menu
+located near the top of each page. It may be a good idea to bookmark the
+web page to make it easier to access next time.
+</p>
+
+<hr>
+
+<h2><a name="Setting Communications Parameters">Setting Communications Parameters:</a></h2>
+
+<p>The web page for "Set Communications Parameters" can be used to set or change
+the parameters for communicating with the field device.
+</p>
+
+<p>On the left side of the page are a series of input boxes which allow you 
+to specify the following information. 
+</p>
+
+<ul>
+	<li>Host - The host name or IP address for the field device. E.g. 'localhost',
+		'127.0.0.1', etc.</li>
+	<li>Port - The port number for the field device. For most Ether SBus devices
+		this would be 5050. However, an alternate port may also be specified if 
+		necessary.</li>
+	<li>Time out - This is the time-out (in seconds) for communicating with the 
+		field device.</li>
+	<li>Stn Address - The SBus station address for the field device. The 
+		station address number may not matter in many applications if the field
+		device ignores it (it is a feature from the serial version of SBus). For 
+		those for which it does matter, the correct value may be specified here.</li>
+	<li>Connect/Disconnect - This is a pair of "radio buttons" which allow you
+		to disconnect from or reconnect to the field device. </li>
+	<li>Auto-Connect - This is a check box which allows you to set whether the
+		system will automatically connect if a connection error occurs. When the
+		check box is ticked, auto reconnect is selected. </li>
+</ul>
+
+<p>Below the input boxes will be a large push button labelled "Apply". When
+this button is pressed, the parameters specified above will be applied. 
+</p>
+
+<p>To the right of input area is a column showing the current parameters.
+These may differ from the parameters in the input area if the values were
+edited but not applied. In addition, there will be a message in large text 
+indicating whether the system is currently connected or not. 
+</p>
+
+<p>The following error message may be displayed: "Error - Could not establish 
+contact with remote host." This indicates that the system attempted to connect
+with the field device, but either the field device could not be contacted, or
+else it refused the connection.
+</p>
+
+
+<p>This page does <em>not</em> allow you to change the port number used by the 
+web server. That must be set as a command line parameter (see above).
+</p>
+
+
+<hr>
+
+<h2><a name="Reading Data">Reading Data:</a></h2>
+
+<p>Data may be read from the field device by using the "Read Ether SBus Data" 
+web page. This page has 20 sets of inputs allowing you to read up to 20 different 
+addresses at the same time. Each input area specifies a single data table 
+value. 
+</p>
+
+<h3>Specifying Parameters:</h3>
+
+<p>Each input area provides a drop down list allowing you to specify input, 
+output, flag, register, or none. If you select "none" that input area will be 
+disabled. In addition, you can enter the SBus data table address. 
+</p>
+
+<p>When you have specified the desired address type and address, click on the
+large "Read Data" button located at the bottom of the screen. The system will 
+then send a series of SBus requests to the field device. When the field 
+device has responded to the queries, the web page will be refreshed to show
+the data which was read beside each of the input areas (or blank if that input
+area was unused). If there were any errors, an error message will be displayed
+in place of the data.   
+</p>
+
+<h3>Clearing (Resetting) the Page:</h3>
+
+<p>Beside the "Read Data" button is a pair of "radio buttons" allowing you to
+select either "Read Data" or "Clear Page". Selecting "Read Data" allows for 
+normal operation. Selecting "Clear Page" causes the input areas to be reset to
+their default values when the "Read Data" button is pressed. When clearing 
+(resetting) the page, no messages are sent to the field device and no data is 
+read.  
+</p>
+
+<h3>SBus Commands Used:</h3>
+
+<p>The system will send an individual SBus request for each address
+specified. The following SBus commands are used:
+</p>
+
+<ul>
+	<li>Flags - Command 2.</li>
+	<li>Inputs - Command 3.</li>
+	<li>Outputs - Command 4.</li>
+	<li>Registers - Command 6.</li>
+</ul>
+
+<p>Each command is used with a quantity of 1.
+</p>
+
+
+<hr>
+
+<h2><a name="Writing Data">Writing Data:</a></h2>
+
+<p>Data may be written to the field device by using the "Write Ether SBus Data" 
+web page. This page has 20 sets of inputs allowing you to write up to 20 
+different addresses at the same time. Each input area specifies a single data 
+table value. 
+</p>
+
+<h3>Specifying Parameters:</h3>
+
+<p>Each input area provides a drop down list allowing you to specify output,  
+flag, register, or none. If you select "none" that input area will be 
+disabled. In addition, you can enter the SBus data table address and the
+data to be written. 
+</p>
+
+<p>When you have specified the desired address type, address, and data, click 
+on the large "Write Data" button located at the bottom of the screen. The system 
+will then send a series of SBus requests to the field device. When the field 
+device has responded to the queries, the web page will be refreshed. If there 
+were any errors, an error message will be displayed to the right of each input
+area.   
+</p>
+
+<h3>Clearing (Resetting) the Page:</h3>
+
+<p>Beside the "Write Data" button is a pair of "radio buttons" allowing you to
+select either "Write Data" or "Clear Page". Selecting "Write Data" allows for 
+normal operation. Selecting "Clear Page" causes the input areas to be reset to
+their default values when the "Write Data" button is pressed. When clearing 
+(resetting) the page, no messages are sent to the field device and no data is 
+written. 
+</p>
+
+<h3>SBus Commands Used:</h3>
+
+<p>The system will send an individual Ether SBus request for each address
+specified. The following SBus commands are used:
+</p>
+
+<ul>
+	<li>Flags - Command 11.</li>
+	<li>Outputs - Command 13.</li>
+	<li>Registers - Command 14.</li>
+</ul>
+
+
+<hr>
+
+<h2><a name="Errors">Errors:</a></h2>
+
+
+<h3>Internal Errors:</h3>
+
+<p>The following error messages are generated internally in the system.
+</p>
+
+<ul>
+	<li>Connection error - The system could not communicate with the field 
+		device. Either the connection was not made, or the field device has
+		disconnected. </li>
+	<li>Invalid address - The address is in an invalid format.</li>
+	<li>Invalid data format - The data is in an invalid format.</li>
+</ul>
+
+
+<h3>Auto Reconnect:</h3>
+
+<p>If auto reconnect is selected and a connection error occurs while attempting
+to read or write data, the system will attempt to reconnect <em>once</em> for
+each data item until either a successful connection is made or until attempts 
+(and failures) for all the data items have been made. 
+</p>
+
+<h3>SBus Errors:</h3>
+
+<p>The following messages represent SBus errors which were returned by
+the field device.
+</p>
+
+<ul>
+	<li>Invalid response length - The length of the response message from the 
+		field device did not match any known valid message format.</li>
+	<li>CRC error - The response message had a CRC error.</li>
+	<li>Device error - The device responded with an error code (NAK). </li>
+	<li>Bad response message - The response message contained some other error 
+		which prevented it from being recognised.</li>
+</ul>
+
+
+<hr>
+
+</div>
+
+
+<!-- Standard footer -->
+<div id="footer">
+	<p>Help</p>
+</div>
+
+</div>
+
+</body>
+</html>
+
+<!-- Copyright 2009 - 2010. Michael Griffin
+This file is part of SBProbe.
+SBProbe is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+SBProbe is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with SBProbe. If not, see <http://www.gnu.org/licenses/>.
+ -->
+

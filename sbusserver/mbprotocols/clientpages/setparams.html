@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>SBProbe - Set Communications Parameters</title>
+
+<link rel="icon" type="image/png" href="systemicon.png">
+<!-- General page layout style sheet. -->
+<link rel="stylesheet" href="systempagelayout.css" type="text/css">
+</head>
+
+<body>
+<div id="filler">
+
+	<div id="header">
+		<p class="headlogo">
+			<img src="/systemlogo.png" width="200" alt="MB Logic Logo"/>
+			<span class="headtitle1">SBProbe </span>
+			<span class="headtitle2"> for an open world in automation</span>
+		</p>
+	</div>
+
+	<!-- This is the standard nav bar. -->
+	<div id="nav">
+		<ul>
+			<li><a href="readdata.html">Read Data</a></li>
+			<li><a href="writedata.html">Write Data</a></li>
+			<li><a href="setparams.html">Set Parameters</a></li>
+			<li><a href="help.html">Help</a></li>
+		</ul>
+	</div>
+
+<div id="datadisplay">
+
+<h1>Set Communications Parameters</h1>
+
+<hr>
+
+<div id="lcolumn">
+
+<form name="setparams" method="post" action="setparams.html" >
+
+<p>
+
+	Host:	
+	<input type="text" maxlength="15" size="15" value="%(host)s" name="host">
+	<br>
+	Port:
+	<input type="text" maxlength="5" size="5" value="%(port)s" name="port">
+	<br>
+	Time out:
+	<input type="text" maxlength="5" size="5" value="%(timeout)s" name="timeout">
+	<br>
+	Stn Address:
+	<input type="text" maxlength="5" size="5" value="%(unitid)s" name="unitid">
+	<br>
+	Connect:
+	<input type="radio" value="connect" name="connect"  %(connectedstat)s>
+	Disconnect:
+	<input type="radio" value="disconnect" name="connect"  %(disconnectedstat)s>
+	<br>
+	Auto-Connect:
+	<input type="checkbox" value="autoconnect" name="autoconnect"  %(autoconnectstat)s>
+	<br>
+
+
+</p>
+
+	<p>
+		<input id="submitbuttons" type="submit" value="Apply">
+	</p>
+
+</form>
+
+</div>
+
+<div id="rcolumn">
+
+	<h2>Actual Connection Status:</h2>
+
+
+	<p>
+	<span id="%(connectionstyle)s">%(connectionstat)s</span>
+	</p>
+
+	<ul>
+		<li>Host: %(currenthost)s</li>
+		<li>Port:  %(currentport)s</li>
+		<li>Time-out:  %(currenttimeout)s</li>
+		<li>Stn Address:  %(currentunitid)s</li>
+	</ul>
+
+	<p>
+	<span class="statusfault">%(connecterror)s</span>
+	</p>
+
+</div>
+
+<div id="screennotes">
+	<p>To update the connection status, re-apply the current parameters.
+	</p>
+	<p>%(softversion)s
+	</p>
+</div>
+
+
+<hr>
+
+</div>
+
+<!-- Standard footer -->
+<div id="footer">
+	<p>Set Communications Parameters</p>
+</div>
+
+</div>
+
+</body>
+</html>
+
+<!-- Copyright 2009. Michael Griffin
+This file is part of SBProbe.
+SBProbe is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+SBProbe is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with SBProbe. If not, see <http://www.gnu.org/licenses/>.
+ -->
+

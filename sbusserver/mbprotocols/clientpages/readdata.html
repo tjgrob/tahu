@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>SBProbe - Read Ether SBus Data</title>
+
+<link rel="icon" type="image/png" href="systemicon.png">
+<!-- General page layout style sheet. -->
+<link rel="stylesheet" href="systempagelayout.css" type="text/css">
+</head>
+
+<body>
+<div id="filler">
+
+	<div id="header">
+		<p class="headlogo">
+			<img src="/systemlogo.png" width="200" alt="MB Logic Logo"/>
+			<span class="headtitle1">SBProbe </span>
+			<span class="headtitle2"> for an open world in automation</span>
+		</p>
+	</div>
+
+
+	<!-- This is the standard nav bar. -->
+	<div id="nav">
+		<ul>
+			<li><a href="readdata.html">Read Data</a></li>
+			<li><a href="writedata.html">Write Data</a></li>
+			<li><a href="setparams.html">Set Parameters</a></li>
+			<li><a href="help.html">Help</a></li>
+		</ul>
+	</div>
+
+<div id="datadisplay">
+
+<h1>Read Ether SBus Data</h1>
+
+<hr>
+
+<form name="readdata" method="post" action="readdata.html" >
+<div id="lcolumn">
+
+<h3>Address Type / Address / Value</h3>
+
+
+<p>
+	<select name="addrtype01">
+	<option>%(addrtype01)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr01)s" name="addr01">
+	<span class="readdatavalues">%(data01)s</span>
+	<span class="statusfault">%(errors01)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype02">
+	<option>%(addrtype02)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr02)s" name="addr02">
+	<span class="readdatavalues">%(data02)s</span>
+	<span class="statusfault">%(errors02)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype03">
+	<option>%(addrtype03)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr03)s" name="addr03">
+	<span class="readdatavalues">%(data03)s</span>
+	<span class="statusfault">%(errors03)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype04">
+	<option>%(addrtype04)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr04)s" name="addr04">
+	<span class="readdatavalues">%(data04)s</span>
+	<span class="statusfault">%(errors04)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype05">
+	<option>%(addrtype05)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr05)s" name="addr05">
+	<span class="readdatavalues">%(data05)s</span>
+	<span class="statusfault">%(errors05)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype06">
+	<option>%(addrtype06)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr06)s" name="addr06">
+	<span class="readdatavalues">%(data06)s</span>
+	<span class="statusfault">%(errors06)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype07">
+	<option>%(addrtype07)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr07)s" name="addr07">
+	<span class="readdatavalues">%(data07)s</span>
+	<span class="statusfault">%(errors07)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype08">
+	<option>%(addrtype08)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr08)s" name="addr08">
+	<span class="readdatavalues">%(data08)s</span>
+	<span class="statusfault">%(errors08)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype09">
+	<option>%(addrtype09)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr09)s" name="addr09">
+	<span class="readdatavalues">%(data09)s</span>
+	<span class="statusfault">%(errors09)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype10">
+	<option>%(addrtype10)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr10)s" name="addr10">
+	<span class="readdatavalues">%(data10)s</span>
+	<span class="statusfault">%(errors10)s</span>
+
+</p>
+
+
+
+</div>
+
+<div id="rcolumn">
+
+<h3>Address Type / Address / Value</h3>
+
+
+<p>
+	<select name="addrtype11">
+	<option>%(addrtype11)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr11)s" name="addr11">
+	<span class="readdatavalues">%(data11)s</span>
+	<span class="statusfault">%(errors11)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype12">
+	<option>%(addrtype12)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr12)s" name="addr12">
+	<span class="readdatavalues">%(data12)s</span>
+	<span class="statusfault">%(errors12)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype13">
+	<option>%(addrtype13)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr13)s" name="addr13">
+	<span class="readdatavalues">%(data13)s</span>
+	<span class="statusfault">%(errors13)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype14">
+	<option>%(addrtype14)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr14)s" name="addr14">
+	<span class="readdatavalues">%(data14)s</span>
+	<span class="statusfault">%(errors14)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype15">
+	<option>%(addrtype15)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr15)s" name="addr15">
+	<span class="readdatavalues">%(data15)s</span>
+	<span class="statusfault">%(errors15)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype16">
+	<option>%(addrtype16)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr16)s" name="addr16">
+	<span class="readdatavalues">%(data16)s</span>
+	<span class="statusfault">%(errors16)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype17">
+	<option>%(addrtype17)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr17)s" name="addr17">
+	<span class="readdatavalues">%(data17)s</span>
+	<span class="statusfault">%(errors17)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype18">
+	<option>%(addrtype18)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr18)s" name="addr18">
+	<span class="readdatavalues">%(data18)s</span>
+	<span class="statusfault">%(errors18)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype19">
+	<option>%(addrtype19)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr19)s" name="addr19">
+	<span class="readdatavalues">%(data19)s</span>
+	<span class="statusfault">%(errors19)s</span>
+
+</p>
+
+
+<p>
+	<select name="addrtype20">
+	<option>%(addrtype20)s</option>
+	<option>Input</option>
+	<option>Output</option>
+	<option>Flag</option>
+	<option>Register</option>
+	<option>None</option>
+	</select>
+
+	<input type="text" maxlength="5" size="5" value="%(addr20)s" name="addr20">
+	<span class="readdatavalues">%(data20)s</span>
+	<span class="statusfault">%(errors20)s</span>
+
+</p>
+
+</div>
+
+<div id="screennotes">
+<p>
+	<!-- Input button to read data. -->
+	<input id="submitbuttons" type="submit" value="Read Data">
+
+
+	<!-- Select whether to read the data or just clear the page. -->
+	Read Data:
+	<input type="radio" value="read" name="read" checked="checked">
+	Clear Page:
+	<input type="radio" value="reset" name="read">
+	<br>
+</p>
+</div>
+
+</form>
+
+<hr>
+
+</div>
+
+
+<!-- Standard footer -->
+<div id="footer">
+	<p>Read SBus Data</p>
+</div>
+
+</div>
+
+</body>
+</html>
+
+<!-- Copyright 2009 - 2010. Michael Griffin
+This file is part of SBProbe.
+SBProbe is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+SBProbe is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with SBProbe. If not, see <http://www.gnu.org/licenses/>.
+ -->
+

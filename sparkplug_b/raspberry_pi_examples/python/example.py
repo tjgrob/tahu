@@ -96,7 +96,7 @@ def on_message(client, userdata, msg):
         outboundPayload = sparkplug.getDdataPayload()
 
         for metric in inboundPayload.metrics:
-            print "Tag Name: " + metric.name
+            print("Tag Name: " + metric.name)
             if metric.name == "Outputs/e":
                 pibrella.output.e.write(metric.boolean_value)
                 addMetric(outboundPayload, "Outputs/e", None, MetricDataType.Boolean, pibrella.output.e.read())
@@ -145,9 +145,9 @@ def on_message(client, userdata, msg):
             if metric.name == "Node Control/Reboot":
                 publishBirths()
     else:
-        print "Unknown command..."
+        print("Unknown command...")
 
-    print "done publishing"
+    print("done publishing")
 ######################################################################
 
 ######################################################################
