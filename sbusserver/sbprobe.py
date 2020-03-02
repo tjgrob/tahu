@@ -95,7 +95,7 @@ import SBusClient
 
 # Name of the directory where the web pages are stored.
 AppPageDir = "C:\\Users\\Thomas Grob\\PycharmProjects\\tahu\\sbusserver\\mbprotocols\\clientpages\\"
-
+AppPageDir = "/home/tgrob/PycharmProjects/tahu/sbusserver/mbprotocols/clientpages/"
 tf=open(AppPageDir+"help.html","r")
 print (tf)
 # Names of the reports.
@@ -315,13 +315,21 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 				# Send the headers.
 				self.send_head(ctype, len(reportdata), ftime)
 				# Send the page.
-				self.wfile.write(reportdata)
+				self.wfile.write(reportdata.encode())
 			else:
 				# We don't recognise the file name, so just send it.
 				# Send the headers.
 				self.send_head(ctype, flength, ftime)
 				# Send the page.
-				shutil.copyfileobj(f, self.wfile)
+#				shutil.copyfileobj(f, self.wfile)
+				reportfile = f.read(-1)
+				if (type(reportfile) is str):
+					print("t str "+str(type(reportfile)))
+					reportdata = str.encode(reportfile,'utf-8')
+				else:
+					print("t byte"+str(type(reportfile)))
+					reportdata=reportfile
+				self.wfile.write(reportdata)
 				f.close()
 
 		else:
