@@ -24,7 +24,7 @@
 ##############################################################################
 
 import struct
-
+import functools
 ##############################################################################
 
 """
@@ -446,8 +446,9 @@ def SBusCRC(inpdata):
 	# This uses the built-in reduce rather than importing it from functools
 	# in order to provide compatiblity with Python 2.5. This may have to be
 	# changed in future for Python 3.x
-	return reduce(lambda crc, newchar: 
-		SBusCRCTable[((crc >> 8) ^ ord(newchar)) & 0xFF] ^ ((crc << 8) & 0xFFFF), 
+#	return 1
+	return functools.reduce(lambda crc, newchar:
+		SBusCRCTable[((crc >> 8) ^ ord(newchar)) & 0xFF] ^ ((crc << 8) & 0xFFFF),
 			inpdata, 0x0000)
 
 ##############################################################################

@@ -1,0 +1,1 @@
+python3.6 sbprobe.py -p 8680 -h 192.168.2.198 -r 5050 -u 198 -t 30.0 -c y -a y

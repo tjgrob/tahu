@@ -122,9 +122,9 @@ class GetOptions:
 	########################################################
 	def __init__(self):
 		self._port = 8680
-		self._rhost = 'localhost'
+		self._rhost = '192.168.2.198'
 		self._rport = '5050'
-		self._runitid = 1
+		self._runitid = 198
 		self._timeout = 5.0
 		self._autoconnect = False
 		self._autoreconnect = True
@@ -376,8 +376,6 @@ class HMIWebRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 		self._HandleReportFile(fpath)
 
 
-
-
 	########################################################
 	def send_head(self, ctype, flength, lastmod):
 		""" Send the headers."""
@@ -390,7 +388,6 @@ class HMIWebRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 		self.end_headers()
 
 
-
 #############################################################################
 
 ############################################################
@@ -399,6 +396,7 @@ class HMIWebRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 # Signal handler.
 def SigHandler(signum, frame):
 	print('Operator terminated server at %s' % time.ctime())
+
 	sys.exit()
 
 

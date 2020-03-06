@@ -105,7 +105,7 @@ class GetOptions:
 				sys.exit()
 
 	########################################################
-	def GetPort(self):
+	def _GetPort(self):
 		"""Return the port setting.
 		"""
 		return self._port
@@ -135,7 +135,7 @@ class SBusMemTable:
 
 
 	########################################################
-	def GetFlags(self, addr, qty):
+	def _GetFlags(self, addr, qty):
 		"""Return qty coil values as a list of booleans. 
 		addr (integer) - Flag address.
 		qty (integer) - Number of flags desired.
@@ -143,7 +143,7 @@ class SBusMemTable:
 		"""
 		return self._Flags[addr : addr + qty]
 
-	def SetFlags(self, addr, qty, data):
+	def _SetFlags(self, addr, qty, data):
 		"""Store the data from a list of booleans to the flags.
 		addr (integer) - Flag address.
 		qty (integer) - Number of flags to set.
@@ -153,24 +153,24 @@ class SBusMemTable:
 
 
 	########################################################
-	def GetInputs(self, addr, qty):
+	def _GetInputs(self, addr, qty):
 		"""Same as GetFlags, but works on inputs.
 		"""
 		return self._Inputs[addr : addr + qty]
 
-	def SetInputs(self, addr, qty, data):
+	def _SetInputs(self, addr, qty, data):
 		"""Same as SetFlags, but works on inputs.
 		"""
 		self._Inputs[addr : addr + qty] = data[:qty]
 
 
 	########################################################
-	def GetOutputs(self, addr, qty):
+	def _GetOutputs(self, addr, qty):
 		"""Same as GetFlags, but works on outputs.
 		"""
 		return self._Outputs[addr : addr + qty]
 
-	def SetOutputs(self, addr, qty, data):
+	def _SetOutputs(self, addr, qty, data):
 		"""Same as SetFlags, but works on outputs.
 		"""
 		self._Outputs[addr : addr + qty] = data[:qty]
@@ -178,7 +178,7 @@ class SBusMemTable:
 
 
 	########################################################
-	def GetRegisters(self, addr, qty):
+	def _GetRegisters(self, addr, qty):
 		"""Return qty register values as a list of signed integers. 
 		addr (integer) - Register address.
 		qty (integer) - Number of registers desired.
@@ -186,7 +186,7 @@ class SBusMemTable:
 		"""
 		return self._Registers[addr : addr + qty]
 
-	def SetRegisters(self, addr, qty, data):
+	def _SetRegisters(self, addr, qty, data):
 		"""Store the data in a list of signed integers to the registers.
 		addr (integer) - Register address.
 		qty (integer) - Number of registers to set.
@@ -201,7 +201,7 @@ class SBusMemTable:
 class MsgHandler(socketserver.DatagramRequestHandler):
 	"""This handles all the received messages.
 	"""
-	def handle(self):
+	def _handle(self):
 		ReceivedData = self.rfile.read()
 
 		if ReceivedData: 
@@ -302,13 +302,13 @@ class MsgHandler(socketserver.DatagramRequestHandler):
 ############################################################
 
 # Signal handler.
-def SigHandler(signum, frame):
+def _SigHandler(signum, frame):
 	print('Operator terminated server at %s' % time.ctime())
 	sys.exit()
 
 
 # Initialise the signal handler.
-signal.signal(signal.SIGINT, SigHandler)
+signal.signal(signal.SIGINT, _SigHandler)
 
 
 # Get the command line parameter options.

@@ -97,7 +97,7 @@ import SBusClient
 AppPageDir = "C:\\Users\\Thomas Grob\\PycharmProjects\\tahu\\sbusserver\\mbprotocols\\clientpages\\"
 AppPageDir = "/home/tgrob/PycharmProjects/tahu/sbusserver/mbprotocols/clientpages/"
 tf=open(AppPageDir+"help.html","r")
-print (tf)
+
 # Names of the reports.
 HelpPage = 'help.html'
 ReadDataPage = 'readdata.html'
@@ -242,7 +242,6 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 	server_version = _VERSION
 	# Set HTTP version.
 	protocol_version = 'HTTP/1.0'
-	print ("t HTTP version")
 
 
 	########################################################
@@ -258,7 +257,7 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 	########################################################
 	def do_GET(self):
 		"""Serve a GET request."""
-		print ("t do Get")
+
 		# Check if the request is the right length. The first element
 		# should be a blank ''.
 		fpath = self.path.split('/')
@@ -276,7 +275,7 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 
 	########################################################
 	def do_HEAD(self):
-		print ("t du Head")
+
 		"""Serve a HEAD request."""
 		f = self.send_head()
 		if f:
@@ -288,7 +287,7 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 		Parameters: filepath (string) = file name.
 		Returns: Nothing. It writes the file out to the browser.
 		"""
-		print ("t HandelreportFile")
+
 		# Check in the application report directory.
 		f, ctype, flength, ftime, ErrorStr = MBWebPage.GetWebPage(AppPageDir, filepath)
 		# Send the reply.
@@ -321,13 +320,13 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 				# Send the headers.
 				self.send_head(ctype, flength, ftime)
 				# Send the page.
-#				shutil.copyfileobj(f, self.wfile)
+				#shutil.copyfileobj(f, self.wfile)
 				reportfile = f.read(-1)
 				if (type(reportfile) is str):
-					print("t str "+str(type(reportfile)))
+
 					reportdata = str.encode(reportfile,'utf-8')
 				else:
-					print("t byte"+str(type(reportfile)))
+
 					reportdata=reportfile
 				self.wfile.write(reportdata)
 				f.close()
@@ -342,7 +341,6 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 		"""Extract the content length and referer file from
 		the headers.
 		"""
-		print ("t Get Headeer Data")
 		headerlist = str(recvheaders).splitlines()
 		contentlengthstr = ''
 		postreferer = ''
@@ -362,7 +360,7 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 	########################################################
 	def do_POST(self):
 		"""Serve a POST request."""
-		print ("t Post")
+
 
 		# Split the headers into separate lines.
 		recvheaders = self.headers
@@ -392,7 +390,7 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 	########################################################
 	def send_head(self, ctype, flength, lastmod):
 		""" Send the headers."""
-		print ("t send head")
+
 		# The file was found and opened, now send the response.
 		self.send_response(200)
 		self.send_header('Content-type', ctype)  
@@ -405,21 +403,6 @@ class HMIWebRequestHandler(http.server.BaseHTTPRequestHandler):
 #############################################################################
 
 ############################################################
-##########TTTTTTTTTTTTT
-class MyTCPRequestHandler(socketserver.StreamRequestHandler):
-
-# handle() method will be called once per connection
-    def handle(self):
-        # Receive and print the data received from client
-        print("Recieved one request from {}".format(self.client_address[0]))
-        msg = self.rfile.readline().strip()
-        print("Data Recieved from client is:".format(msg))
-        print(msg)
-
-        # Send some data to client
-        self.wfile.write("Hello Client....Got your message".encode())
-        print("Data to client is sent")
-##########TTTTTTTTTTTTT
 
 # Signal handler.
 def SigHandler(signum, frame):
@@ -470,10 +453,7 @@ if CmdOpts.GetAutoConnect():
 bindcount = 10
 while True:
 	try:
-#		allow_reuse_address = True
-#		httpd = socketserver.TCPServer(("127.0.0.1", CmdOpts.GetPort()), MyTCPRequestHandler)
 		httpd = socketserver.TCPServer(("127.0.0.1", CmdOpts.GetPort()), HMIWebRequestHandler)
-		print ("t socketserver up")
 		break	# Succeeded, so we can exit this loop.
 	except:
 		if (bindcount > 0):
