@@ -205,6 +205,7 @@ class ReadData:
 
                 if (func is not None) and (addrval is not None):
                     try:
+                        print("t r func "+str(func)+"adr "+str(addrval))
                         result, msgdata = self._ConnectionHandler.Request(func, addrval)
 
                         if result:
@@ -346,12 +347,18 @@ class WriteData:
 
         # Read the data from the field device.
         for addrtype, addr, data, errors in self._DataKeys:
+            try:
+                func, addrval, writevalue, errmsg = self._ParamValidator.Validate(self._PageData[addrtype.encode()].decode(),
+                                 self._PageData[addr.encode()].decode(), self._PageData[data.encode()].decode())
 
-            func, addrval, writevalue, errmsg = self._ParamValidator.Validate(
-                self._PageData[addrtype.encode()].decode(),
+            except:
+                func = None
+                addrval = None
+                writevalue = None
+                errmsg = 'No write values'
 
-                self._PageData[addr.encode()].decode(), self._PageData[data.encode()].decode())
             if ((func != None) and (addrval != None) and (writevalue != None)):
+                print("t w func " + str(func) + "adr " + str(addrval))
                 try:
                     result, msgdata = self._ConnectionHandler.Request(func, addrval, writevalue)
                     if not result:
@@ -379,7 +386,7 @@ class ConnectionStat:
         clienthandler (class) = A class which handles the actual client
         communications functions.
         """
-        self._rhost = 'localhost'
+        self._rhost = '192.168.2.198'
         self._rport = defaultrport
         self._rtimeout = 5.0
         self._runitid = 1
@@ -580,7 +587,9 @@ class ConnectionStat:
         and data are the same as for the corresponding client object method.
         """
         try:
+            print("t request func "+str(func)+"adr "+str(addr)+"data "+str(data))
             result, recvdata = self._ClientConnect.Request(func, addr, data)
+            print("t result "+str(result)+"data "+str(recvdata))
         except:
             result = False
             recvdata = _ErrorMsgs['connnecterror']

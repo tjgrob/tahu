@@ -148,7 +148,7 @@ def bin2boollist(binval):
 	E.g. '\x2F' --> [True, True, True, True, False, True, False, False]
 	"""
 	# Split the string into a list of characters.
-	chararray = list(binval)
+	chararray = binval
 	boollist = []
 	# Next, look up the boolean equivalents and add them to the output list.
 	[boollist.extend(boolhexlist[i]) for i in chararray]

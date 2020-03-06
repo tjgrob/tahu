@@ -123,9 +123,9 @@ class GetOptions:
 	########################################################
 	def __init__(self):
 		self._port = 8680
-		self._rhost = 'localhost'
+		self._rhost = '192.168.2.198'
 		self._rport = '5050'
-		self._runitid = 1
+		self._runitid = 198
 		self._timeout = 5.0
 		self._autoconnect = False
 		self._autoreconnect = True

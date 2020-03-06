@@ -231,6 +231,7 @@ class SBusClientMessages:
 
 		# Verify the CRC.
 		if (msgcrc == calccrc):
+			print("t tele "+str(telegramattr)+"messeq "+str(msgsequence)+"msgdata "+str(msgdata))
 			return (telegramattr, msgsequence, msgdata)
 		else:
 			# Bad CRC.
@@ -448,7 +449,7 @@ def SBusCRC(inpdata):
 	# changed in future for Python 3.x
 #	return 1
 	return functools.reduce(lambda crc, newchar:
-		SBusCRCTable[((crc >> 8) ^ ord(newchar)) & 0xFF] ^ ((crc << 8) & 0xFFFF),
+		SBusCRCTable[((crc >> 8) ^ newchar) & 0xFF] ^ ((crc << 8) & 0xFFFF),
 			inpdata, 0x0000)
 
 ##############################################################################
