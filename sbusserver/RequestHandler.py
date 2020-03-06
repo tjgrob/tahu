@@ -201,7 +201,7 @@ class ReadData:
                 except:
                     func = None
                     addrval = None
-                    errmsg = 'No red values'
+                    errmsg = 'No values'
 
                 if (func is not None) and (addrval is not None):
                     try:
@@ -209,15 +209,17 @@ class ReadData:
                         result, msgdata = self._ConnectionHandler.Request(func, addrval)
 
                         if result:
-                            self._PageData[data.encode()] = msgdata
+                            self._PageData[data] = str(msgdata)
+                            self._PageData[addr] = str(addrval)
+                            self._PageData[addrtype] = self._PageData[addrtype.encode()].decode('utf-8')
                         else:
-                            self._PageData[errors.encode()] = msgdata
-
+                            self._PageData[errors] = str(msgdata)
+#
                     except:
-                        self._PageData[errors.encode()] = _ErrorMsgs['connectionerror ']
+                        self._PageData[errors] = _ErrorMsgs['connectionerror']
 
                 elif (len(errmsg) > 0):
-                    self._PageData[errors.encode()] = errmsg
+                    self._PageData[errors] = errmsg
 
 
 ############################################################
@@ -355,19 +357,23 @@ class WriteData:
                 func = None
                 addrval = None
                 writevalue = None
-                errmsg = 'No write values'
+                errmsg = 'None'
 
             if ((func != None) and (addrval != None) and (writevalue != None)):
                 print("t w func " + str(func) + "adr " + str(addrval))
                 try:
                     result, msgdata = self._ConnectionHandler.Request(func, addrval, writevalue)
-                    if not result:
-                        self._PageData[errors.encode()] = msgdata
+                    if result:
+                        self._PageData[data] = str(writevalue)
+                        self._PageData[addr] = str(addrval)
+                        self._PageData[addrtype] = self._PageData[addrtype.encode()].decode('utf-8')
+                    else:
+                        self._PageData[errors] = str(msgdata)
                 except:
-                    self._PageData[errors.encode()] = _ErrorMsgs['connectionerror']
+                    self._PageData[errors] = _ErrorMsgs['connectionerror']
 
             elif (len(errmsg) > 0):
-                self._PageData[errors.encode()] = errmsg
+                self._PageData[errors] = errmsg
 
 
 ############################################################
