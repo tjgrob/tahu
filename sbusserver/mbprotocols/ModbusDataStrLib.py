@@ -40,29 +40,29 @@ The packed binary strings in all list oriented functions are compatible with
 Modbus messages.
 
 1) bin2boollist(binval): Accepts a packed binary and outputs a list of 
-	boolean values. 
-	E.g. '\x2F' --> [True, True, True, True, False, True, False, False]
+    boolean values.
+    E.g. '\x2F' --> [True, True, True, True, False, True, False, False]
 
 2) boollist2bin(boollist): Accepts a list of boolean values and outputs
-	a packed binary string. If the length of the input list is not an even
-	multiple of 8, it is padded out with False values to fit.
-	E.g. [True, True, True, True, False, True, False, False] --> '\x2F'
+    a packed binary string. If the length of the input list is not an even
+    multiple of 8, it is padded out with False values to fit.
+    E.g. [True, True, True, True, False, True, False, False] --> '\x2F'
 
 3) bin2intlist(binval): Accepts a packed binary string and outputs a list of
-	*unsigned* 16 bit integers.
-	E.g. '\xF1\x23\x12\xD9' --> [61731, 4825]
+    *unsigned* 16 bit integers.
+    E.g. '\xF1\x23\x12\xD9' --> [61731, 4825]
 
 4) intlist2bin(intlist): Accepts a list of *unsigned* 16 bit integers and 
-	outputs a packed binary string.
-	E.g. [61731, 4825] --> '\xF1\x23\x12\xD9'
+    outputs a packed binary string.
+    E.g. [61731, 4825] --> '\xF1\x23\x12\xD9'
 
 5) signedbin2intlist(binval): Same as bin2intlist but outputs a list of *signed* 
-	integers.
-	E.g. '\xF1\x23\x12\xD9' --> [-3805, 4825]
+    integers.
+    E.g. '\xF1\x23\x12\xD9' --> [-3805, 4825]
 
 6) signedintlist2bin(intlist): Same as intlist2bin but accepts a list of *signed* 
-	integers.
-	E.g. [-3805, 4825] --> '\xF1\x23\x12\xD9'
+    integers.
+    E.g. [-3805, 4825] --> '\xF1\x23\x12\xD9'
 
 
 String Oriented Functions:
@@ -72,12 +72,12 @@ The following functions operate on character strings. The packed binary strings
 are compatible with Modbus messages.
 
 1) inversorbin(data) - Accepts a string in raw binary format (e.g. '\x2F'), and
-	returns an ASCII string of 0 and/or 1 characters. E.g. '11110100'
+    returns an ASCII string of 0 and/or 1 characters. E.g. '11110100'
 
 2) bininversor(data) - The inverse of inversorbin.
 
 3) bin2hex(bin) - Accepts a string in raw binary format. (e.g. '\x2F\x91') and
-	returns a string in ASCII hexadecimal. (e.g. '2F91')
+    returns a string in ASCII hexadecimal. (e.g. '2F91')
 
 4) hex2bin(hexa) - The inverse of bin2hex.
 
@@ -86,11 +86,11 @@ Miscellaneous:
 ==============
 
 1) coilvalue(state) - If state = 0, it returns '\x00\x00', else it returns
-	'\xFF\x00'. This is used for providing the correct parameter values 
-	required by Modbus function 5 (write single coil).
+    '\xFF\x00'. This is used for providing the correct parameter values
+    required by Modbus function 5 (write single coil).
 
 2) swapbytes(binval) - Accepts a packed binary string and returns another with the 
-	bytes swapped. The input must have an even number of bytes.
+    bytes swapped. The input must have an even number of bytes.
 
 3) bitreversebin(data) - Reverses the bit order in each byte of data in a binary string.
 
@@ -99,33 +99,33 @@ Miscellaneous:
 5) bit2binstr(data) - Equivalent to bininversor, but does not reverse the bit order.
 
 6) bytepack(lbyte, hbyte) - Pack two unsigned bytes into a signed integer. 
-	Packing is little-endian.
-	Parameters: lbyte, hbyte - low and high bytes (0 - 255).
-	Returns: A signed 16 bit integer.
+    Packing is little-endian.
+    Parameters: lbyte, hbyte - low and high bytes (0 - 255).
+    Returns: A signed 16 bit integer.
 
 7) byteunpack(intval) - Unpacks a signed integer into two unsigned bytes.
-	Packing is little-endian.
-	Parameters: intval - A signed 16 bit integer.
-	Returns: lbyte, hbyte - low and high bytes (0 - 255).
+    Packing is little-endian.
+    Parameters: intval - A signed 16 bit integer.
+    Returns: lbyte, hbyte - low and high bytes (0 - 255).
 
 
 Word and Packed Binary String Conversions:
 ==========================================
 
 1) Int2BinStr(intdata): Pack a 16 bit integer into a binary string. This may be 
-	used where a binary string is expected, but the data is in integer format.
-	Parameters: intdata (integer).
-	Returns: binary string. 
+    used where a binary string is expected, but the data is in integer format.
+    Parameters: intdata (integer).
+    Returns: binary string.
 
 2) BinStr2Int(strdata): Convert a packed binary string to a 16 bit integer. 
-	Parameters: intdata (binary string).
-	Returns: integer.
+    Parameters: intdata (binary string).
+    Returns: integer.
 
 3) SignedInt2BinStrintdata): Same as Int2BinStr but accepts a signed integer
-	instead of unsigned.
+    instead of unsigned.
 
 4) BinStr2SignedInt(strdata): Same as BinStr2Int but returns a signed integer
-	instead of unsigned.
+    instead of unsigned.
 
 """
 #############################################################
@@ -143,88 +143,90 @@ import array
 #############################################################
 # bin2boollist
 def bin2boollist(binval):
-	"""bin2boollist
-	Accepts a packed binary and outputs a list of boolean values. 
-	E.g. '\x2F' --> [True, True, True, True, False, True, False, False]
-	"""
-	# Split the string into a list of characters.
-	chararray = binval
-	boollist = []
-	# Next, look up the boolean equivalents and add them to the output list.
-	[boollist.extend(boolhexlist[i]) for i in chararray]
-	return boollist
+    """bin2boollist
+    Accepts a packed binary and outputs a list of boolean values.
+    E.g. '\x2F' --> [True, True, True, True, False, True, False, False]
+    """
+    # Split the string into a list of characters.
+    chararray = binval
+    boollist = []
+    # Next, look up the boolean equivalents and add them to the output list.
+#    t = bytes(chararray[0])
+#    tt= bboolhexlist[t]
+    [boollist.extend(bboolhexlist[i]) for i in chararray]
+    return boollist
 
 
 #############################################################
 # boollist2bin
 def boollist2bin(boollist):
-	"""boollist2bin
-	Accepts a list of boolean values and outputs a packed binary string. 
-	If the length of the input list is not an even multiple of 8, it
-	is padded out with False values to fit.
-	E.g. [True, True, True, True, False, True, False, False] --> '\x2F'
-	"""
-	# Convert the list of boolean values into a list of tuples, with the values
-	# grouped together in multiples of 8. Then use a dictionary to convert the 
-	# string keys into the packed binary strings.
+    """boollist2bin
+    Accepts a list of boolean values and outputs a packed binary string.
+    If the length of the input list is not an even multiple of 8, it
+    is padded out with False values to fit.
+    E.g. [True, True, True, True, False, True, False, False] --> '\x2F'
+    """
+    # Convert the list of boolean values into a list of tuples, with the values
+    # grouped together in multiples of 8. Then use a dictionary to convert the
+    # string keys into the packed binary strings.
 
-	# First, try this assuming we have a multiple of 8.
-	try:
-		return ''.join([boolhexlistinvert[tuple(boollist[i : i + 8])] for i in range(0, len(boollist), 8)])
+    # First, try this assuming we have a multiple of 8.
+    try:
+        return ''.join([boolhexlistinvert[tuple(boollist[i : i + 8])] for i in range(0, len(boollist), 8)])
 
-	# If we had an error, then try again after padding it.
-	except:
+    # If we had an error, then try again after padding it.
+    except:
 
-		# Check if the list needs to be padded out to a multiple of 8.
-		if ((len(boollist) % 8) != 0):
-			boolinput = []
-			boolinput.extend(boollist)
-			boolinput.extend([False] * (8 - len(boollist) % 8))
-		else:
-			boolinput = boollist
-		return ''.join([boolhexlistinvert[tuple(boolinput[i : i + 8])] for i in range(0, len(boolinput), 8)])
+        # Check if the list needs to be padded out to a multiple of 8.
+        if ((len(boollist) % 8) != 0):
+            boolinput = []
+            boolinput.extend(boollist)
+            boolinput.extend([False] * (8 - len(boollist) % 8))
+        else:
+            boolinput = boollist
+        return ''.join([boolhexlistinvert[tuple(boolinput[i : i + 8])] for i in range(0, len(boolinput), 8)])
 
 
 #############################################################
 # bin2intlist
 def bin2intlist(binval):
-	""" bin2intlist
-	Accepts a packed binary string and outputs a list of *unsigned* 
-	16 bit integers. E.g. '\xF1\x23\x12\xD9' --> [61731, 4825]
-	binval *must* be an even number of bytes to convert to integers.
-	"""
-	return list(struct.unpack('>%dH' % (len(binval) / 2), binval))
+    """ bin2intlist
+    Accepts a packed binary string and outputs a list of *unsigned*
+    16 bit integers. E.g. '\xF1\x23\x12\xD9' --> [61731, 4825]
+    binval *must* be an even number of bytes to convert to integers.
+    """
+    return list(struct.unpack('>%dH' % (len(binval) / 2), binval))
 
 
 #############################################################
 # intlist2bin
 def intlist2bin(intlist):
-	"""intlist2bin
-	Accepts a list of *unsigned* 16 bit integers and outputs a packed 
-	binary string. E.g. [61731, 4825] --> '\xF1\x23\x12\xD9'
-	"""
-	return struct.pack('>%dH' % len(intlist), *intlist)
+    """intlist2bin
+    Accepts a list of *unsigned* 16 bit integers and outputs a packed
+    binary string. E.g. [61731, 4825] --> '\xF1\x23\x12\xD9'
+    """
+    return struct.pack('>%dH' % len(intlist), *intlist)
 
 
 #############################################################
 # signedbin2intlist
 def signedbin2intlist(binval):
-	""" signedbin2intlist
-	Same as bin2intlist but outputs a list of *signed* integers.
-	binval *must* be an even number of bytes to convert to integers.
-	E.g. '\xF1\x23\x12\xD9' --> [-3805, 4825]
-	"""
-	return list(struct.unpack('>%dh' % (len(binval) / 2), binval))
+    """ signedbin2intlist
+    Same as bin2intlist but outputs a list of *signed* integers.
+    binval *must* be an even number of bytes to convert to integers.
+    E.g. '\xF1\x23\x12\xD9' --> [-3805, 4825]
+    """
+    return list(struct.unpack('>%dh' % (len(binval) / 2), binval))
 
 
 #############################################################
 # signedintlist2bin
 def signedintlist2bin(intlist):
-	"""signedintlist2bin
-	Same as intlist2bin but accepts a list of *signed* 
-	integers. E.g. [-3805, 4825] --> '\xF1\x23\x12\xD9'
-	"""
-	return struct.pack('>%dh' % len(intlist), *intlist)
+    """signedintlist2bin
+    Same as intlist2bin but accepts a list of *signed*
+    integers. E.g. [-3805, 4825] --> '\xF1\x23\x12\xD9'
+    """
+    return struct.pack('>%dh' % len(intlist), *intlist)
 
 
 ##############################################################################
@@ -232,60 +234,60 @@ def signedintlist2bin(intlist):
 #############################################################
 # coilvalue
 def coilvalue(state):
-	"""coilvalue
-	This provides the numeric value used to turn a single coil on or off.
-	state = a integer where 0 = off, and any non-zero number = on.
-	Returns an integer of value 0x0000 (off) or 0xFF00 (on).
-	"""
-	if (state == 0):
-		return '\x00\x00'
-	else:
-		return '\xFF\x00'
+    """coilvalue
+    This provides the numeric value used to turn a single coil on or off.
+    state = a integer where 0 = off, and any non-zero number = on.
+    Returns an integer of value 0x0000 (off) or 0xFF00 (on).
+    """
+    if (state == 0):
+        return '\x00\x00'
+    else:
+        return '\xFF\x00'
 
 #############################################################
 # swapbytes
 def swapbytes(binval):
-	"""Accepts a packed binary string and returns another with the 
-	bytes swapped. The input must have an even number of bytes.
-	"""
-	binlistarray = array.array('h')
-	binlistarray.fromstring(binval)
-	binlistarray.byteswap()
-	return binlistarray.tostring()
-	
+    """Accepts a packed binary string and returns another with the
+    bytes swapped. The input must have an even number of bytes.
+    """
+    binlistarray = array.array('h')
+    binlistarray.fromstring(binval)
+    binlistarray.byteswap()
+    return binlistarray.tostring()
+
 
 #############################################################
 # bitreversebin
 def bitreversebin(data):
-	"""bitreversebin
-	Reverses the bit order in each byte of data in a binary string.
-	This uses a 256 element dictionary to do the conversion.
-	Parameters:
-	data = a string in raw binary format.
-	Returns a raw binary string with the bits in each byte reversed.
-	E.g. '\x2F' returns '\xF4'.
-	"""
-	return ''.join([_bitreversebindict[data[i]] for i in range(0, len(data))])
+    """bitreversebin
+    Reverses the bit order in each byte of data in a binary string.
+    This uses a 256 element dictionary to do the conversion.
+    Parameters:
+    data = a string in raw binary format.
+    Returns a raw binary string with the bits in each byte reversed.
+    E.g. '\x2F' returns '\xF4'.
+    """
+    return ''.join([_bitreversebindict[data[i]] for i in range(0, len(data))])
 
 #############################################################
 # bytepack.
 def bytepack(lbyte, hbyte):
-	"""Pack two unsigned bytes into a signed integer.
-	Packing is little-endian.
-	Parameters: lbyte, hbyte - low and high bytes (0 - 255).
-	Returns: A signed 16 bit integer.
-	"""
-	return struct.unpack('<h', struct.pack('<BB', lbyte, hbyte))[0]
-	
+    """Pack two unsigned bytes into a signed integer.
+    Packing is little-endian.
+    Parameters: lbyte, hbyte - low and high bytes (0 - 255).
+    Returns: A signed 16 bit integer.
+    """
+    return struct.unpack('<h', struct.pack('<BB', lbyte, hbyte))[0]
+
 #############################################################
 # byteunpack.
 def byteunpack(intval):
-	"""Unpacks a signed integer into two unsigned bytes.
-	Packing is little-endian.
-	Parameters: intval - A signed 16 bit integer.
-	Returns: lbyte, hbyte - low and high bytes (0 - 255).
-	"""
-	return struct.unpack('<BB', struct.pack('<h', intval))
+    """Unpacks a signed integer into two unsigned bytes.
+    Packing is little-endian.
+    Parameters: intval - A signed 16 bit integer.
+    Returns: lbyte, hbyte - low and high bytes (0 - 255).
+    """
+    return struct.unpack('<BB', struct.pack('<h', intval))
 
 
 # The following functions may be used to convert between integers and binary strings.
@@ -293,44 +295,44 @@ def byteunpack(intval):
 ##############################################################################
 # Int2BinSt
 def Int2BinStr(intdata):
-	""" Int2BinStr: Pack a 16 bit unsigned integer into a binary string. 
-	This may be used where a binary string is expected, but the data is in 
-	unsigned integer format.
-	Parameters: intdata (integer).
-	Returns: binary string. 
-	"""
-	return struct.pack('>H', intdata)
+    """ Int2BinStr: Pack a 16 bit unsigned integer into a binary string.
+    This may be used where a binary string is expected, but the data is in
+    unsigned integer format.
+    Parameters: intdata (integer).
+    Returns: binary string.
+    """
+    return struct.pack('>H', intdata)
 
 ##############################################################################
 # BinStr2Int
 def BinStr2Int(strdata):
-	"""BinStr2Int(strdata): Convert a packed binary string to an 
-	unsigned 16 bit integer. 
-	Parameters: intdata (binary string).
-	Returns: integer.
-	"""
-	return struct.unpack('>H', strdata)[0]
+    """BinStr2Int(strdata): Convert a packed binary string to an
+    unsigned 16 bit integer.
+    Parameters: intdata (binary string).
+    Returns: integer.
+    """
+    return struct.unpack('>H', strdata)[0]
 
 ##############################################################################
 # SignedInt2BinSt
 def SignedInt2BinStr(intdata):
-	""" Int2BinStr: Pack a 16 bit signed integer into a binary string. 
-	This may be used where a binary string is expected, but the data is in 
-	signed integer format.
-	Parameters: intdata (integer).
-	Returns: binary string. 
-	"""
-	return struct.pack('>h', intdata)
+    """ Int2BinStr: Pack a 16 bit signed integer into a binary string.
+    This may be used where a binary string is expected, but the data is in
+    signed integer format.
+    Parameters: intdata (integer).
+    Returns: binary string.
+    """
+    return struct.pack('>h', intdata)
 
 ##############################################################################
 # BinStr2SignedInt
 def BinStr2SignedInt(strdata):
-	"""BinStr2Int(strdata): Convert a packed binary string to a 
-	signed 16 bit integer. 
-	Parameters: intdata (binary string).
-	Returns: integer.
-	"""
-	return struct.unpack('>h', strdata)[0]
+    """BinStr2Int(strdata): Convert a packed binary string to a
+    signed 16 bit integer.
+    Parameters: intdata (binary string).
+    Returns: integer.
+    """
+    return struct.unpack('>h', strdata)[0]
 
 
 ############################################################################################
@@ -341,53 +343,53 @@ def BinStr2SignedInt(strdata):
 #############################################################
 # inversorbin 
 def inversorbin(data):
-	"""inversorbin 
-	Convert packed binary data to an ASCII string of '0' and '1'
-	characters and reverse the bit order for Modbus protocol.
-	Parameters: data = a string in raw binary format. E.g. '\x2F'
-	Returns an ASCII string of 0 and/or 1 characters. E.g. '11110100'
-	"""
-	return ''.join([hexbininvert[data[i]] for i in range(0, len(data))])
+    """inversorbin
+    Convert packed binary data to an ASCII string of '0' and '1'
+    characters and reverse the bit order for Modbus protocol.
+    Parameters: data = a string in raw binary format. E.g. '\x2F'
+    Returns an ASCII string of 0 and/or 1 characters. E.g. '11110100'
+    """
+    return ''.join([hexbininvert[data[i]] for i in range(0, len(data))])
 
 
 #############################################################
 # bininversor
 def bininversor(data):
-	"""bininversor
-	Inverse operation of inversorbin.
-	data = An ASCII string of 0 and/or 1 characters. E.g. '11110100'
-		Input data must be in multiples of 8 characters.
-	Returns a string in raw binary format. E.g. '\x2F'
-	There are no checks for invalid input characters!
-	"""
-	return ''.join([binhexinvert[data[i : i + 8]] for i in range(0, len(data), 8)])
+    """bininversor
+    Inverse operation of inversorbin.
+    data = An ASCII string of 0 and/or 1 characters. E.g. '11110100'
+        Input data must be in multiples of 8 characters.
+    Returns a string in raw binary format. E.g. '\x2F'
+    There are no checks for invalid input characters!
+    """
+    return ''.join([binhexinvert[data[i : i + 8]] for i in range(0, len(data), 8)])
 
 
 #############################################################
 # bin2bitstr
 def bin2bitstr(data):
-	"""bin2bitstr
-	Convert packed binary strings to  ASCII bit strings *without*
-		doing any Modbus bit order reversal.
-	Parameters:
-	data = a string in raw binary format. E.g. '\x2F'
-	Returns an ASCII string of 0 and/or 1 characters. E.g. '11110100'
-	There are no checks for invalid input characters! 
-	"""
-	return ''.join([_bin2bitdict[data[i]] for i in range(0, len(data))])
+    """bin2bitstr
+    Convert packed binary strings to  ASCII bit strings *without*
+        doing any Modbus bit order reversal.
+    Parameters:
+    data = a string in raw binary format. E.g. '\x2F'
+    Returns an ASCII string of 0 and/or 1 characters. E.g. '11110100'
+    There are no checks for invalid input characters!
+    """
+    return ''.join([_bin2bitdict[data[i]] for i in range(0, len(data))])
 
 #############################################################
 # bit2binstr
 def bit2binstr(data):
-	"""bit2binstr
-	Convert ASCII bit strings to packed binary strings *without*
-		doing any Modbus bit order reversal.
-	data = An ASCII string of 0 and/or 1 characters. E.g. '00101111'
-		Input data must be in multiples of 8 characters.
-	Returns a string in raw binary format. E.g. '\x2F'
-	There are no checks for invalid input characters! 
-	"""
-	return ''.join([_bit2bindict[data[i : i + 8]] for i in range(0, len(data), 8)])
+    """bit2binstr
+    Convert ASCII bit strings to packed binary strings *without*
+        doing any Modbus bit order reversal.
+    data = An ASCII string of 0 and/or 1 characters. E.g. '00101111'
+        Input data must be in multiples of 8 characters.
+    Returns a string in raw binary format. E.g. '\x2F'
+    There are no checks for invalid input characters!
+    """
+    return ''.join([_bit2bindict[data[i : i + 8]] for i in range(0, len(data), 8)])
 
 
 
@@ -499,7 +501,7 @@ hexbininvert = {
 # Create a new dictionary by inverting hexbininvert.
 #
 def MakeBinHex():
-	return dict([(j, i) for i, j in hexbininvert.items()])
+    return dict([(j, i) for i, j in hexbininvert.items()])
 
 binhexinvert = MakeBinHex()
 
@@ -580,7 +582,7 @@ _bin2bitdict = {
 # Create a new dictionary by inverting _bin2bitdict.
 #
 def MakeBit2Bin():
-	return dict([(j, i) for i, j in _bin2bitdict.items()])
+    return dict([(j, i) for i, j in _bin2bitdict.items()])
 
 _bit2bindict = MakeBit2Bin()
 
@@ -925,11 +927,271 @@ boolhexlist = {
 '\xFF' : [True, True, True, True, True, True, True, True]
 }
 
+# Create a dictionary for converting packed binary strings to boolean lists.
+# This is for the list oriented conversions.
+bboolhexlist = {
+ord(b'\x00'): [False, False, False, False, False, False, False, False],
+ord(b'\x01'): [True, False, False, False, False, False, False, False],
+ord(b'\x02'): [False, True, False, False, False, False, False, False],
+ord(b'\x03'): [True, True, False, False, False, False, False, False],
+ord(b'\x04'): [False, False, True, False, False, False, False, False],
+ord(b'\x05'): [True, False, True, False, False, False, False, False],
+ord(b'\x06'): [False, True, True, False, False, False, False, False],
+ord(b'\x07'): [True, True, True, False, False, False, False, False],
+ord(b'\x08'): [False, False, False, True, False, False, False, False],
+ord(b'\x09'): [True, False, False, True, False, False, False, False],
+ord(b'\x0A'): [False, True, False, True, False, False, False, False],
+ord(b'\x0B'): [True, True, False, True, False, False, False, False],
+ord(b'\x0C'): [False, False, True, True, False, False, False, False],
+ord(b'\x0D'): [True, False, True, True, False, False, False, False],
+ord(b'\x0E'): [False, True, True, True, False, False, False, False],
+ord(b'\x0F'): [True, True, True, True, False, False, False, False],
+ord(b'\x10'): [False, False, False, False, True, False, False, False],
+ord(b'\x11'): [True, False, False, False, True, False, False, False],
+ord(b'\x12'): [False, True, False, False, True, False, False, False],
+ord(b'\x13'): [True, True, False, False, True, False, False, False],
+ord(b'\x14'): [False, False, True, False, True, False, False, False],
+ord(b'\x15'): [True, False, True, False, True, False, False, False],
+ord(b'\x16'): [False, True, True, False, True, False, False, False],
+ord(b'\x17'): [True, True, True, False, True, False, False, False],
+ord(b'\x18'): [False, False, False, True, True, False, False, False],
+ord(b'\x19'): [True, False, False, True, True, False, False, False],
+ord(b'\x1A'): [False, True, False, True, True, False, False, False],
+ord(b'\x1B'): [True, True, False, True, True, False, False, False],
+ord(b'\x1C'): [False, False, True, True, True, False, False, False],
+ord(b'\x1D'): [True, False, True, True, True, False, False, False],
+ord(b'\x1E'): [False, True, True, True, True, False, False, False],
+ord(b'\x1F'): [True, True, True, True, True, False, False, False],
+ord(b'\x20'): [False, False, False, False, False, True, False, False],
+ord(b'\x21'): [True, False, False, False, False, True, False, False],
+ord(b'\x22'): [False, True, False, False, False, True, False, False],
+ord(b'\x23'): [True, True, False, False, False, True, False, False],
+ord(b'\x24'): [False, False, True, False, False, True, False, False],
+ord(b'\x25'): [True, False, True, False, False, True, False, False],
+ord(b'\x26'): [False, True, True, False, False, True, False, False],
+ord(b'\x27'): [True, True, True, False, False, True, False, False],
+ord(b'\x28'): [False, False, False, True, False, True, False, False],
+ord(b'\x29'): [True, False, False, True, False, True, False, False],
+ord(b'\x2A'): [False, True, False, True, False, True, False, False],
+ord(b'\x2B'): [True, True, False, True, False, True, False, False],
+ord(b'\x2C'): [False, False, True, True, False, True, False, False],
+ord(b'\x2D'): [True, False, True, True, False, True, False, False],
+ord(b'\x2E'): [False, True, True, True, False, True, False, False],
+ord(b'\x2F'): [True, True, True, True, False, True, False, False],
+ord(b'\x30'): [False, False, False, False, True, True, False, False],
+ord(b'\x31'): [True, False, False, False, True, True, False, False],
+ord(b'\x32'): [False, True, False, False, True, True, False, False],
+ord(b'\x33'): [True, True, False, False, True, True, False, False],
+ord(b'\x34'): [False, False, True, False, True, True, False, False],
+ord(b'\x35'): [True, False, True, False, True, True, False, False],
+ord(b'\x36'): [False, True, True, False, True, True, False, False],
+ord(b'\x37'): [True, True, True, False, True, True, False, False],
+ord(b'\x38'): [False, False, False, True, True, True, False, False],
+ord(b'\x39'): [True, False, False, True, True, True, False, False],
+ord(b'\x3A'): [False, True, False, True, True, True, False, False],
+ord(b'\x3B'): [True, True, False, True, True, True, False, False],
+ord(b'\x3C'): [False, False, True, True, True, True, False, False],
+ord(b'\x3D'): [True, False, True, True, True, True, False, False],
+ord(b'\x3E'): [False, True, True, True, True, True, False, False],
+ord(b'\x3F'): [True, True, True, True, True, True, False, False],
+ord(b'\x40'): [False, False, False, False, False, False, True, False],
+ord(b'\x41'): [True, False, False, False, False, False, True, False],
+ord(b'\x42'): [False, True, False, False, False, False, True, False],
+ord(b'\x43'): [True, True, False, False, False, False, True, False],
+ord(b'\x44'): [False, False, True, False, False, False, True, False],
+ord(b'\x45'): [True, False, True, False, False, False, True, False],
+ord(b'\x46'): [False, True, True, False, False, False, True, False],
+ord(b'\x47'): [True, True, True, False, False, False, True, False],
+ord(b'\x48'): [False, False, False, True, False, False, True, False],
+ord(b'\x49'): [True, False, False, True, False, False, True, False],
+ord(b'\x4A'): [False, True, False, True, False, False, True, False],
+ord(b'\x4B'): [True, True, False, True, False, False, True, False],
+ord(b'\x4C'): [False, False, True, True, False, False, True, False],
+ord(b'\x4D'): [True, False, True, True, False, False, True, False],
+ord(b'\x4E'): [False, True, True, True, False, False, True, False],
+ord(b'\x4F'): [True, True, True, True, False, False, True, False],
+ord(b'\x50'): [False, False, False, False, True, False, True, False],
+ord(b'\x51'): [True, False, False, False, True, False, True, False],
+ord(b'\x52'): [False, True, False, False, True, False, True, False],
+ord(b'\x53'): [True, True, False, False, True, False, True, False],
+ord(b'\x54'): [False, False, True, False, True, False, True, False],
+ord(b'\x55'): [True, False, True, False, True, False, True, False],
+ord(b'\x56'): [False, True, True, False, True, False, True, False],
+ord(b'\x57'): [True, True, True, False, True, False, True, False],
+ord(b'\x58'): [False, False, False, True, True, False, True, False],
+ord(b'\x59'): [True, False, False, True, True, False, True, False],
+ord(b'\x5A'): [False, True, False, True, True, False, True, False],
+ord(b'\x5B'): [True, True, False, True, True, False, True, False],
+ord(b'\x5C'): [False, False, True, True, True, False, True, False],
+ord(b'\x5D'): [True, False, True, True, True, False, True, False],
+ord(b'\x5E'): [False, True, True, True, True, False, True, False],
+ord(b'\x5F'): [True, True, True, True, True, False, True, False],
+ord(b'\x60'): [False, False, False, False, False, True, True, False],
+ord(b'\x61'): [True, False, False, False, False, True, True, False],
+ord(b'\x62'): [False, True, False, False, False, True, True, False],
+ord(b'\x63'): [True, True, False, False, False, True, True, False],
+ord(b'\x64'): [False, False, True, False, False, True, True, False],
+ord(b'\x65'): [True, False, True, False, False, True, True, False],
+ord(b'\x66'): [False, True, True, False, False, True, True, False],
+ord(b'\x67'): [True, True, True, False, False, True, True, False],
+ord(b'\x68'): [False, False, False, True, False, True, True, False],
+ord(b'\x69'): [True, False, False, True, False, True, True, False],
+ord(b'\x6A'): [False, True, False, True, False, True, True, False],
+ord(b'\x6B'): [True, True, False, True, False, True, True, False],
+ord(b'\x6C'): [False, False, True, True, False, True, True, False],
+ord(b'\x6D'): [True, False, True, True, False, True, True, False],
+ord(b'\x6E'): [False, True, True, True, False, True, True, False],
+ord(b'\x6F'): [True, True, True, True, False, True, True, False],
+ord(b'\x70'): [False, False, False, False, True, True, True, False],
+ord(b'\x71'): [True, False, False, False, True, True, True, False],
+ord(b'\x72'): [False, True, False, False, True, True, True, False],
+ord(b'\x73'): [True, True, False, False, True, True, True, False],
+ord(b'\x74'): [False, False, True, False, True, True, True, False],
+ord(b'\x75'): [True, False, True, False, True, True, True, False],
+ord(b'\x76'): [False, True, True, False, True, True, True, False],
+ord(b'\x77'): [True, True, True, False, True, True, True, False],
+ord(b'\x78'): [False, False, False, True, True, True, True, False],
+ord(b'\x79'): [True, False, False, True, True, True, True, False],
+ord(b'\x7A'): [False, True, False, True, True, True, True, False],
+ord(b'\x7B'): [True, True, False, True, True, True, True, False],
+ord(b'\x7C'): [False, False, True, True, True, True, True, False],
+ord(b'\x7D'): [True, False, True, True, True, True, True, False],
+ord(b'\x7E'): [False, True, True, True, True, True, True, False],
+ord(b'\x7F'): [True, True, True, True, True, True, True, False],
+ord(b'\x80'): [False, False, False, False, False, False, False, True],
+ord(b'\x81'): [True, False, False, False, False, False, False, True],
+ord(b'\x82'): [False, True, False, False, False, False, False, True],
+ord(b'\x83'): [True, True, False, False, False, False, False, True],
+ord(b'\x84'): [False, False, True, False, False, False, False, True],
+ord(b'\x85'): [True, False, True, False, False, False, False, True],
+ord(b'\x86'): [False, True, True, False, False, False, False, True],
+ord(b'\x87'): [True, True, True, False, False, False, False, True],
+ord(b'\x88'): [False, False, False, True, False, False, False, True],
+ord(b'\x89'): [True, False, False, True, False, False, False, True],
+ord(b'\x8A'): [False, True, False, True, False, False, False, True],
+ord(b'\x8B'): [True, True, False, True, False, False, False, True],
+ord(b'\x8C'): [False, False, True, True, False, False, False, True],
+ord(b'\x8D'): [True, False, True, True, False, False, False, True],
+ord(b'\x8E'): [False, True, True, True, False, False, False, True],
+ord(b'\x8F'): [True, True, True, True, False, False, False, True],
+ord(b'\x90'): [False, False, False, False, True, False, False, True],
+ord(b'\x91'): [True, False, False, False, True, False, False, True],
+ord(b'\x92'): [False, True, False, False, True, False, False, True],
+ord(b'\x93'): [True, True, False, False, True, False, False, True],
+ord(b'\x94'): [False, False, True, False, True, False, False, True],
+ord(b'\x95'): [True, False, True, False, True, False, False, True],
+ord(b'\x96'): [False, True, True, False, True, False, False, True],
+ord(b'\x97'): [True, True, True, False, True, False, False, True],
+ord(b'\x98'): [False, False, False, True, True, False, False, True],
+ord(b'\x99'): [True, False, False, True, True, False, False, True],
+ord(b'\x9A'): [False, True, False, True, True, False, False, True],
+ord(b'\x9B'): [True, True, False, True, True, False, False, True],
+ord(b'\x9C'): [False, False, True, True, True, False, False, True],
+ord(b'\x9D'): [True, False, True, True, True, False, False, True],
+ord(b'\x9E'): [False, True, True, True, True, False, False, True],
+ord(b'\x9F'): [True, True, True, True, True, False, False, True],
+ord(b'\xA0'): [False, False, False, False, False, True, False, True],
+ord(b'\xA1'): [True, False, False, False, False, True, False, True],
+ord(b'\xA2'): [False, True, False, False, False, True, False, True],
+ord(b'\xA3'): [True, True, False, False, False, True, False, True],
+ord(b'\xA4'): [False, False, True, False, False, True, False, True],
+ord(b'\xA5'): [True, False, True, False, False, True, False, True],
+ord(b'\xA6'): [False, True, True, False, False, True, False, True],
+ord(b'\xA7'): [True, True, True, False, False, True, False, True],
+ord(b'\xA8'): [False, False, False, True, False, True, False, True],
+ord(b'\xA9'): [True, False, False, True, False, True, False, True],
+ord(b'\xAA'): [False, True, False, True, False, True, False, True],
+ord(b'\xAB'): [True, True, False, True, False, True, False, True],
+ord(b'\xAC'): [False, False, True, True, False, True, False, True],
+ord(b'\xAD'): [True, False, True, True, False, True, False, True],
+ord(b'\xAE'): [False, True, True, True, False, True, False, True],
+ord(b'\xAF'): [True, True, True, True, False, True, False, True],
+ord(b'\xB0'): [False, False, False, False, True, True, False, True],
+ord(b'\xB1'): [True, False, False, False, True, True, False, True],
+ord(b'\xB2'): [False, True, False, False, True, True, False, True],
+ord(b'\xB3'): [True, True, False, False, True, True, False, True],
+ord(b'\xB4'): [False, False, True, False, True, True, False, True],
+ord(b'\xB5'): [True, False, True, False, True, True, False, True],
+ord(b'\xB6'): [False, True, True, False, True, True, False, True],
+ord(b'\xB7'): [True, True, True, False, True, True, False, True],
+ord(b'\xB8'): [False, False, False, True, True, True, False, True],
+ord(b'\xB9'): [True, False, False, True, True, True, False, True],
+ord(b'\xBA'): [False, True, False, True, True, True, False, True],
+ord(b'\xBB'): [True, True, False, True, True, True, False, True],
+ord(b'\xBC'): [False, False, True, True, True, True, False, True],
+ord(b'\xBD'): [True, False, True, True, True, True, False, True],
+ord(b'\xBE'): [False, True, True, True, True, True, False, True],
+ord(b'\xBF'): [True, True, True, True, True, True, False, True],
+ord(b'\xC0'): [False, False, False, False, False, False, True, True],
+ord(b'\xC1'): [True, False, False, False, False, False, True, True],
+ord(b'\xC2'): [False, True, False, False, False, False, True, True],
+ord(b'\xC3'): [True, True, False, False, False, False, True, True],
+ord(b'\xC4'): [False, False, True, False, False, False, True, True],
+ord(b'\xC5'): [True, False, True, False, False, False, True, True],
+ord(b'\xC6'): [False, True, True, False, False, False, True, True],
+ord(b'\xC7'): [True, True, True, False, False, False, True, True],
+ord(b'\xC8'): [False, False, False, True, False, False, True, True],
+ord(b'\xC9'): [True, False, False, True, False, False, True, True],
+ord(b'\xCA'): [False, True, False, True, False, False, True, True],
+ord(b'\xCB'): [True, True, False, True, False, False, True, True],
+ord(b'\xCC'): [False, False, True, True, False, False, True, True],
+ord(b'\xCD'): [True, False, True, True, False, False, True, True],
+ord(b'\xCE'): [False, True, True, True, False, False, True, True],
+ord(b'\xCF'): [True, True, True, True, False, False, True, True],
+ord(b'\xD0'): [False, False, False, False, True, False, True, True],
+ord(b'\xD1'): [True, False, False, False, True, False, True, True],
+ord(b'\xD2'): [False, True, False, False, True, False, True, True],
+ord(b'\xD3'): [True, True, False, False, True, False, True, True],
+ord(b'\xD4'): [False, False, True, False, True, False, True, True],
+ord(b'\xD5'): [True, False, True, False, True, False, True, True],
+ord(b'\xD6'): [False, True, True, False, True, False, True, True],
+ord(b'\xD7'): [True, True, True, False, True, False, True, True],
+ord(b'\xD8'): [False, False, False, True, True, False, True, True],
+ord(b'\xD9'): [True, False, False, True, True, False, True, True],
+ord(b'\xDA'): [False, True, False, True, True, False, True, True],
+ord(b'\xDB'): [True, True, False, True, True, False, True, True],
+ord(b'\xDC'): [False, False, True, True, True, False, True, True],
+ord(b'\xDD'): [True, False, True, True, True, False, True, True],
+ord(b'\xDE'): [False, True, True, True, True, False, True, True],
+ord(b'\xDF'): [True, True, True, True, True, False, True, True],
+ord(b'\xE0'): [False, False, False, False, False, True, True, True],
+ord(b'\xE1'): [True, False, False, False, False, True, True, True],
+ord(b'\xE2'): [False, True, False, False, False, True, True, True],
+ord(b'\xE3'): [True, True, False, False, False, True, True, True],
+ord(b'\xE4'): [False, False, True, False, False, True, True, True],
+ord(b'\xE5'): [True, False, True, False, False, True, True, True],
+ord(b'\xE6'): [False, True, True, False, False, True, True, True],
+ord(b'\xE7'): [True, True, True, False, False, True, True, True],
+ord(b'\xE8'): [False, False, False, True, False, True, True, True],
+ord(b'\xE9'): [True, False, False, True, False, True, True, True],
+ord(b'\xEA'): [False, True, False, True, False, True, True, True],
+ord(b'\xEB'): [True, True, False, True, False, True, True, True],
+ord(b'\xEC'): [False, False, True, True, False, True, True, True],
+ord(b'\xED'): [True, False, True, True, False, True, True, True],
+ord(b'\xEE'): [False, True, True, True, False, True, True, True],
+ord(b'\xEF'): [True, True, True, True, False, True, True, True],
+ord(b'\xF0'): [False, False, False, False, True, True, True, True],
+ord(b'\xF1'): [True, False, False, False, True, True, True, True],
+ord(b'\xF2'): [False, True, False, False, True, True, True, True],
+ord(b'\xF3'): [True, True, False, False, True, True, True, True],
+ord(b'\xF4'): [False, False, True, False, True, True, True, True],
+ord(b'\xF5'): [True, False, True, False, True, True, True, True],
+ord(b'\xF6'): [False, True, True, False, True, True, True, True],
+ord(b'\xF7'): [True, True, True, False, True, True, True, True],
+ord(b'\xF8'): [False, False, False, True, True, True, True, True],
+ord(b'\xF9'): [True, False, False, True, True, True, True, True],
+ord(b'\xFA'): [False, True, False, True, True, True, True, True],
+ord(b'\xFB'): [True, True, False, True, True, True, True, True],
+ord(b'\xFC'): [False, False, True, True, True, True, True, True],
+ord(b'\xFD'): [True, False, True, True, True, True, True, True],
+ord(b'\xFE'): [False, True, True, True, True, True, True, True],
+ord(b'\xFF'): [True, True, True, True, True, True, True, True]
+}
 #############################################################
 # Create a new dictionary by inverting hexlist. The keys must be tuples,
 # as lists are not hashable.
 def MakeBoolHex():
-	return dict([(tuple(j), i) for i, j in boolhexlist.items()])
+    return dict([(tuple(j), i) for i, j in boolhexlist.items()])
 boolhexlistinvert = MakeBoolHex()
 
 
